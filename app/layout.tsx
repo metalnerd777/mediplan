@@ -9,8 +9,8 @@ const fontSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "MediPlan",
-  description: "Una aplicación para centros médicos",
+  title: "Mediplan",
+  description: "",
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={fontSans.className}>{children}</body>
     </html>
   );
 }
