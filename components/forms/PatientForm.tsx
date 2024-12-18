@@ -50,9 +50,12 @@ const PatientForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
-        <section className="mb-12 space-y-4">
-          <h1 className="header">Bienvenido</h1>
-          <p className="text-dark-700">Agende su primera cita</p>
+        <section className="mb-10 space-y-4">
+          <h1 className="header">Bienvenido 👋</h1>
+          <p className="text-dark-700">Vamos a agendar su cita médica</p>
+          <p className="text-dark-700">
+            Por favor, complete los siguentes datos:
+          </p>
         </section>
         {/* nombre */}
         <CustormFormField
@@ -85,7 +88,7 @@ const PatientForm = () => {
           iconAlt="email"
         />
 
-        <SubmitButton isLoading={isLoading}>Iniciar</SubmitButton>
+        <SubmitButton isLoading={isLoading}>Ingresar</SubmitButton>
       </form>
     </Form>
   );
