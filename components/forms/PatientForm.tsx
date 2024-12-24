@@ -10,6 +10,7 @@ import SubmitButton from "../SubmitButton";
 import { useState } from "react";
 import { UserFormValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/actions/patients.actions";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -40,11 +41,17 @@ const PatientForm = () => {
   }: z.infer<typeof UserFormValidation>) {
     setIsLoading(true);
     try {
-      // const userData = { name, email, phone };
-      // const user = await createUser(userData);
-      // if (user) router.push(`/patients/${user.$id}/register`);
+      const user = { name, email, phone };
+      const newUser = await createUser(user);
+      if (newUser) {
+        router.push(`/patients/${newUser.$id}/register`);
+      } else {
+        console.log("Error: No se pudo crear el usuario");
+      }
     } catch (error) {
-      console.log(error);
+      console.log("Error al crear el usuario:", error);
+    } finally {
+      setIsLoading(false);
     }
   }
   return (
@@ -52,9 +59,9 @@ const PatientForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
         <section className="mb-10 space-y-4">
           <h1 className="header">Bienvenido 👋</h1>
-          <p className="text-dark-700">Vamos a agendar su cita médica</p>
+          <p className="text-dark-700">Vamos a agendar su cita médica 💉 </p>
           <p className="text-dark-700">
-            Por favor, complete los siguentes datos:
+            Por favor, complete los siguientes datos:
           </p>
         </section>
         {/* nombre */}
@@ -67,6 +74,16 @@ const PatientForm = () => {
           iconSrc="/assets/icons/user.svg"
           iconAlt="usuario"
         />
+        {/* RUT
+        <CustormFormField
+          fieldType={FormFieldType.INPUT}
+          control={form.control}
+          name="rut"
+          label="Cédula de identidad"
+          placeholder="Ingrese su RUT"
+          iconSrc="/assets/icons/user.svg"
+          iconAlt="rut"
+        /> */}
         {/* Email */}
         <CustormFormField
           fieldType={FormFieldType.INPUT}
